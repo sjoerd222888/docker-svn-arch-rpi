@@ -11,4 +11,31 @@ To execute  the docker container simply run
 docker run -d -p 3690:3690 -v /data/path:/var/svn --name container-name sjoerd222/svn-arch-rpi
 ```
 
-Please rename 'container-name' with something meaningful, e.g. 'svn'.
+Please rename 'container-name' with something meaningful, e.g. 'svn'. Replace /data/path with the path for your repository data.
+
+The docker images uses svnserve. You can refer to the [Subversion article](https://wiki.archlinux.org/index.php/Subversion) on the arch linux wiki.
+
+## Create reposiotories
+
+To create a new repository you need to *bash* into the container first
+
+```
+docker exec -i -t svn /bin/bash 
+```
+
+And then you can actually create your repository with 
+
+```
+svnadmin create /var/svn/REPO_NAME
+
+```
+Replace 'REPO_NAME' with something meaningful, e.g. 'my-awesome-project'.
+
+Dont' forget to add some security! By default everything is accesible so be sure to add a password.
+
+## Connect to repository
+
+The url to your repository is: svn://YOUR_DOMAIN_OR_IP_ADDRESS/REPO_NAME
+
+
+
